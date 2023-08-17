@@ -36,7 +36,7 @@ export class FetchData extends Component {
       </table>
     );
   }
-
+  
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
