@@ -1,8 +1,12 @@
+using Sample.React.AspNet.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IAuthService, JwtAuthService>();
 
 var app = builder.Build();
 
