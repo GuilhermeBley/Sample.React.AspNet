@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
 
-import api from '../../api';
-import history from '../../history';
+import api from '../api';
 
 export default function useAuth() {
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('jwt');
 
         if (token) {
-            api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
             setAuthenticated(true);
         }
 
@@ -19,19 +17,14 @@ export default function useAuth() {
     }, []);
 
     async function handleLogin() {
-        const { data: { token } } = await api.post('/authenticate');
-
-        localStorage.setItem('token', JSON.stringify(token));
-        api.defaults.headers.Authorization = `Bearer ${token}`;
+        const { data: { token } } = await api.post('/api/login');
+        localStorage.setItem('jwt', JSON.stringify(token));
         setAuthenticated(true);
-        history.push('/users');
     }
 
     function handleLogout() {
+        localStorage.removeItem('jwt');
         setAuthenticated(false);
-        localStorage.removeItem('token');
-        api.defaults.headers.Authorization = undefined;
-        history.push('/login');
     }
 
     return { authenticated, loading, handleLogin, handleLogout };
