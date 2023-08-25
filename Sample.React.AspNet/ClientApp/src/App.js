@@ -4,7 +4,7 @@ import AppRoutes from './AppRoutes';
 import { Layout } from './components/Layout';
 import './custom.css';
 
-import { AuthProvider } from './Context/AuthContext';
+import { AuthProvider } from './Auth/AuthContext';
 
 export default class App extends Component {
     static displayName = App.name;
