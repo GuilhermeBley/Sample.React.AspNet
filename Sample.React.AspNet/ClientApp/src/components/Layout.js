@@ -6,13 +6,23 @@ export class Layout extends Component {
     static displayName = Layout.name;
 
     render() {
+
+        const { authenticated } = this.context;
+
+        if (authenticated) {
+            return (
+                <div>
+                    <NavMenu />
+                    <Container>
+                        {this.props.children}
+                    </Container>
+                </div>
+            );
+        }
+
         return (
             <div>
-                <NavMenu />
-                <Container>
-                    {this.props.children}
-                </Container>
-            </div>
-        );
+                {this.props.children}
+            </div>);
     }
 }
