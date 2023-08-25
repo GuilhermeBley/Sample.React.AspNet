@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import api from '../api';
+import fetcher from '../api';
 
 export default function useAuth() {
     const [authenticated, setAuthenticated] = useState(false);
@@ -12,13 +12,16 @@ export default function useAuth() {
         if (token) {
             setAuthenticated(true);
         }
+        else {
+            setAuthenticated(false);
+        }
 
         setLoading(false);
     }, []);
 
     async function handleLogin() {
-        const { data: { token } } = await api.post('/api/login');
-        localStorage.setItem('jwt', JSON.stringify(token));
+        const { data: { token } } = await fetcher('/api/login', { method: "POST" });
+        localStorage.setItem('jwt', token);
         setAuthenticated(true);
     }
 
