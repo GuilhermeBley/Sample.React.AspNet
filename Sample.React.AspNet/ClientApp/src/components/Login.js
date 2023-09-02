@@ -5,17 +5,15 @@ export class Login extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { currentCount: 0 };
-        this.incrementCounter = this.incrementCounter.bind(this);
+        this.state = { logging: false };
     }
 
-    incrementCounter() {
-        this.setState({
-            currentCount: this.state.currentCount + 1
-        });
+    redirectAndHandleLogin() {
+        this.props.history.push("path/to/push");
     }
 
     render() {
+
         return (
             <div>
                 <section class="vh-100">
@@ -68,7 +66,7 @@ export class Login extends Component {
                                     </div>
 
                                     <div class="text-center text-lg-start mt-4 pt-2">
-                                        <button type="button" class="btn btn-primary btn-lg" style={{'padding-left': '2.5rem', 'padding-right': '2.5rem;'}}>Login</button>
+                                        <button type="button" onClick={this.redirectAndHandleLogin} class="btn btn-primary btn-lg" style={{'padding-left': '2.5rem', 'padding-right': '2.5rem;'}}>Login</button>
                                         <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
                                             class="link-danger">Register</a></p>
                                     </div>
