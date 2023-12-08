@@ -1,4 +1,5 @@
 ﻿import { createContext, useEffect, useState } from "react";
+import { jwtDocode } from 'jwt-decode'
 
 export const AuthContext = createContext({});
 
@@ -7,15 +8,22 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const userToken = localStorage.getItem("user_token");
-        const usersStorage = localStorage.getItem("users_bd");
 
-        if (userToken && usersStorage) {
-            const hasUser = JSON.parse(usersStorage)?.filter(
-                (user) => user.email === JSON.parse(userToken).email
-            );
+        if (userToken === null)
+            return;
 
-            if (hasUser) setUser(hasUser[0]);
-        }
+        var decodedResult = jwtDocode(userToken);
+
+        let currentDate = new Date();
+
+        if (decodedResult.exp * 1000 < currentDate.getTime()) {
+            signout();
+            console.log("Token expired.");
+            return;
+        } 
+
+        setUser(decodedResult);
+
     }, []);
 
     const signin = (email) => {
