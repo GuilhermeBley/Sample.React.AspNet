@@ -2,19 +2,26 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Login } from "./components/Login";
 import { Home } from "./components/Home";
+import { useAuth } from "./hooks/useAuth"
+
+const Private = ({ Item }) => {
+    const { signed } = useAuth();
+
+    return signed > 0 ? <Item /> : <Login />;
+};
 
 const AppRoutes = [
     {
         index: true,
-        element: <Home />
+        element: <Private Item={Home} />
     },
     {
         path: '/counter',
-        element: <Counter />
+        element: <Private Item={Counter} />
     },
     {
         path: '/fetch-data',
-        element: <FetchData />
+        element: <Private Item={FetchData} />
     },
     {
         path: '/Login',
