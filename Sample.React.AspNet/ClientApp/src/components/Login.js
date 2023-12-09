@@ -8,10 +8,6 @@ export class Login extends Component {
         this.state = { logging: false };
     }
 
-    redirectAndHandleLogin() {
-        this.props.history.push("path/to/push");
-    }
-
     render() {
 
         return (
