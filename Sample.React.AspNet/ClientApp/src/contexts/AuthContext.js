@@ -1,5 +1,5 @@
 ﻿import { createContext, useEffect, useState } from "react";
-import { jwtDocode } from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
 
 export const AuthContext = createContext({});
 
@@ -12,7 +12,16 @@ export const AuthProvider = ({ children }) => {
         if (userToken === null)
             return;
 
-        var decodedResult = jwtDocode(userToken);
+        var decodedResult;
+        try {
+            decodedResult = jwtDecode(userToken);
+        }
+        catch {
+            return;
+        }
+
+        if (decodedResult === null)
+            return;
 
         let currentDate = new Date();
 
