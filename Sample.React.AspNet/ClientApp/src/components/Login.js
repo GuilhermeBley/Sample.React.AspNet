@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../api';
 
 export class Login extends Component {
     static displayName = Login.name;
@@ -82,8 +83,6 @@ export class Login extends Component {
                                             Login
                                         </button>
 
-                                        let
-
                                         <p class="text-danger"></p>
 
                                         <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
@@ -133,7 +132,7 @@ export class Login extends Component {
             body: JSON.stringify(loginRequestModel)
         };
 
-        fetch("/api/login", options)
+        api.fetch("/api/login", options)
             .then(resp => {
                 if (!resp.ok) {
 

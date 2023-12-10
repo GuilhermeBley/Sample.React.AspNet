@@ -1,3 +1,5 @@
+const baseAddress = "http://localhost:5043";
+
 function updateOptions(options) {
     const update = { ...options };
     if (localStorage.jwt) {
@@ -9,6 +11,10 @@ function updateOptions(options) {
     return update;
 }
 
-export default function fetcher(url, options) {
+export default function fetch(url, options) {
+
+    if (url.charAt(0) !== '/')
+        url = baseAddress.concat('/', url);
+
     return fetch(url, updateOptions(options));
 }
