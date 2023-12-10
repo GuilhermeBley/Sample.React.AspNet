@@ -5,11 +5,17 @@ export class Login extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { logging: false };
+        this.state = {
+            logging: false,
+            error: null,
+            userName: null,
+            password: null,
+        };
+        this.tryLogin = this.tryLogin.bind(this);
     }
 
     render() {
-
+        
         return (
             <div>
                 <section class="vh-100">
@@ -40,14 +46,21 @@ export class Login extends Component {
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="email" id="form3Example3" class="form-control form-control-lg"
-                                            placeholder="Enter a valid email address" />
+                                        <input
+                                            type="email"
+                                            id="form3Example3"
+                                            class="form-control form-control-lg"
+                                            placeholder="Enter a valid email address"
+                                            onChange={this.state.userName} />
                                         <label class="form-label" for="form3Example3">Email address</label>
                                     </div>
 
                                     <div class="form-outline mb-3">
-                                        <input type="password" id="form3Example4" class="form-control form-control-lg"
-                                            placeholder="Enter password" />
+                                        <input type="password"
+                                            id="form3Example4"
+                                            class="form-control form-control-lg"
+                                            placeholder="Enter password"
+                                            onChange={ this.state.password } />
                                         <label class="form-label" for="form3Example4">Password</label>
                                     </div>
 
@@ -62,7 +75,17 @@ export class Login extends Component {
                                     </div>
 
                                     <div class="text-center text-lg-start mt-4 pt-2">
-                                        <button type="button" onClick={this.redirectAndHandleLogin} class="btn btn-primary btn-lg" style={{'padding-left': '2.5rem', 'padding-right': '2.5rem;'}}>Login</button>
+                                        <button type="button"
+                                            onClick={this.tryLogin}
+                                            class="btn btn-primary btn-lg"
+                                            style={{ 'padding-left': '2.5rem', 'padding-right': '2.5rem;' }}>
+                                            Login
+                                        </button>
+
+                                        let
+
+                                        <p class="text-danger"></p>
+
                                         <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
                                             class="link-danger">Register</a></p>
                                     </div>
@@ -94,5 +117,35 @@ export class Login extends Component {
                 </section>
             </div>
         );
+    }
+
+    tryLogin() {
+
+        var loginRequestModel = {
+            userName: this.state.userName
+        };
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginRequestModel)
+        };
+
+        fetch("/api/login", options)
+            .then(resp => {
+                if (!resp.ok) {
+
+                    this.setState({
+                        error: "Invalid login or password."
+                    });
+
+                    return;
+                }
+
+                this.props.history.push("/home");
+            })
+            .catch(e => console.log(e));
     }
 }
