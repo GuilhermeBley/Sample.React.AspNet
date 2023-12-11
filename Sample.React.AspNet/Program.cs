@@ -17,6 +17,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseCors(x => x.AllowAnyHeader().AllowCredentials().AllowAnyMethod().WithOrigins("http://localhost:44471"));
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -29,12 +31,5 @@ app.UseEndpoints(endpoints =>
 });
 
 app.MapFallbackToFile("index.html");
-
-app.UseCors(config =>
-    config.AllowAnyMethod()
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-        .SetIsOriginAllowed(origin => true)
-        .AllowCredentials());
 
 app.Run();
