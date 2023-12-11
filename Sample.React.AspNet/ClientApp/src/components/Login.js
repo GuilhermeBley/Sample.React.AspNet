@@ -7,16 +7,14 @@ export class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logging: false,
-            error: null,
-            userName: null,
-            password: null,
+            username: '',
+            password: '',
+            loggedIn: false,
         };
-        this.tryLogin = this.tryLogin.bind(this);
     }
 
     render() {
-        
+
         return (
             <div>
                 <section class="vh-100">
@@ -51,8 +49,10 @@ export class Login extends Component {
                                             type="email"
                                             id="form3Example3"
                                             class="form-control form-control-lg"
+                                            name="username"
                                             placeholder="Enter a valid email address"
-                                            onChange={this.state.userName} />
+                                            value={this.state.username}
+                                            onChange={this.handleInputChange}/>
                                         <label class="form-label" for="form3Example3">Email address</label>
                                     </div>
 
@@ -61,7 +61,8 @@ export class Login extends Component {
                                             id="form3Example4"
                                             class="form-control form-control-lg"
                                             placeholder="Enter password"
-                                            onChange={ this.state.password } />
+                                            value={this.state.password}
+                                            onChange={this.handleInputChange} />
                                         <label class="form-label" for="form3Example4">Password</label>
                                     </div>
 
@@ -77,7 +78,7 @@ export class Login extends Component {
 
                                     <div class="text-center text-lg-start mt-4 pt-2">
                                         <button type="button"
-                                            onClick={this.tryLogin}
+                                            onClick={this.handleSubmit}
                                             class="btn btn-primary btn-lg"
                                             style={{ 'padding-left': '2.5rem', 'padding-right': '2.5rem;' }}>
                                             Login
@@ -118,10 +119,12 @@ export class Login extends Component {
         );
     }
 
-    tryLogin() {
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const { username } = this.state;
 
         var loginRequestModel = {
-            userName: this.state.userName
+            userName: username
         };
 
         const options = {
@@ -147,4 +150,11 @@ export class Login extends Component {
             })
             .catch(e => console.log(e));
     }
+
+    handleInputChange = (event) => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value,
+        });
+    };
 }
