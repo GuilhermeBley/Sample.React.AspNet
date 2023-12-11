@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '../api';
+import apiFetch from '../api';
 
 export class Login extends Component {
     static displayName = Login.name;
@@ -132,10 +132,10 @@ export class Login extends Component {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(loginRequestModel)
+            body: JSON.stringify(loginRequestModel),
         };
 
-        api.fetch("/api/login", options)
+        apiFetch("api/login", options)
             .then(resp => {
                 if (!resp.ok) {
 

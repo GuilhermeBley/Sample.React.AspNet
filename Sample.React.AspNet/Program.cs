@@ -30,4 +30,11 @@ app.UseEndpoints(endpoints =>
 
 app.MapFallbackToFile("index.html");
 
+app.UseCors(config =>
+    config.AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .SetIsOriginAllowed(origin => true)
+        .AllowCredentials());
+
 app.Run();

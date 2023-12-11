@@ -11,10 +11,10 @@ function updateOptions(options) {
     return update;
 }
 
-export default function fetch(url, options) {
+export default function apiFetch(url, options) {
 
     if (url.charAt(0) !== '/')
         url = baseAddress.concat('/', url);
 
-    return fetch(url, updateOptions(options));
+    return fetch(url, options);
 }
