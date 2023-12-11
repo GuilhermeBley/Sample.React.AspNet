@@ -16,5 +16,5 @@ export default function apiFetch(url, options) {
     if (url.charAt(0) !== '/')
         url = baseAddress.concat('/', url);
 
-    return fetch(url, options);
+    return fetch(url, updateOptions(options));
 }
