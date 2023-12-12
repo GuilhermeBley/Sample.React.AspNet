@@ -4,8 +4,8 @@ function updateOptions(options) {
     const update = { ...options };
 
     update.headers = {
-        'Access-Control-Request-Headers': "access-control-allow-origin",
-        'Access-Control-Request-Method': `${options.method}`
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS,GET'
     };
 
     if (localStorage.jwt) {
