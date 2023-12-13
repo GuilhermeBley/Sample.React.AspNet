@@ -35,24 +35,28 @@ export const AuthProvider = ({ children }) => {
 
     }, []);
 
-    const signin = (email) => {
+    const signin = (token) => {
 
-        var loginRequestModel = {
-            userName : email
-        };
+        if (token === null)
+            return;
 
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(loginRequestModel)
-        };
+        var decodedResult;
+        try {
+            decodedResult = jwtDecode(token);
+        }
+        catch {
+            return;
+        }
 
-        fetch("api/login", options)
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
+        let currentDate = new Date();
+
+        if (decodedResult.exp * 1000 < currentDate.getTime()) {
+            signout();
+            console.log("Token expired.");
+            return;
+        }
+
+        setUser(decodedResult);
     };
 
     const signout = () => {
