@@ -14,7 +14,7 @@ public interface IAuthService
 
 public class JwtAuthService : IAuthService
 {
-    public const string KEY = "my-secret-key";
+    public const string KEY = "this is my custom Secret key for authentication";
 
     public JwtAuthService()
     {
@@ -23,7 +23,7 @@ public class JwtAuthService : IAuthService
     public string GenerateToken(Claim[] claims)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var keyEncoded = Encoding.ASCII.GetBytes(KEY);
+        var keyEncoded = Encoding.UTF8.GetBytes(KEY);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
