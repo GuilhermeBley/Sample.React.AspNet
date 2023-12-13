@@ -3,11 +3,6 @@ const baseAddress = "http://localhost:5043";
 function updateOptions(options) {
     const update = { ...options };
 
-    update.headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS,GET'
-    };
-
     if (localStorage.jwt) {
         update.headers = {
             ...update.headers,

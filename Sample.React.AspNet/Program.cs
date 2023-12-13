@@ -17,6 +17,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseCors(cfg =>
+{
+    cfg.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -25,7 +30,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+        pattern: "api/{controller=Home}/{action=Index}/{id?}");
 });
 
 app.MapFallbackToFile("index.html");
