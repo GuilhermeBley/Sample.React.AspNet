@@ -5,6 +5,7 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
+    const itemKey = "user_token";
 
     useEffect(() => {
         const userToken = localStorage.getItem("user_token");
@@ -56,12 +57,13 @@ export const AuthProvider = ({ children }) => {
             return;
         }
 
+        localStorage.setItem(itemKey, token);
         setUser(decodedResult);
     };
 
     const signout = () => {
         setUser(null);
-        localStorage.removeItem("user_token");
+        localStorage.removeItem(itemKey);
     };
 
     return (
