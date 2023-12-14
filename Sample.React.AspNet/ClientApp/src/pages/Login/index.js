@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import apiFetch from '../api';
-import useAuth from '../hooks/useAuth'
+import apiFetch from '../../api';
+import useAuth from '../../hooks/useAuth'
 
 const Login = () => {
 
