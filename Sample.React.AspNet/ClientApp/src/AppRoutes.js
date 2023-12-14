@@ -2,7 +2,7 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import Login from "./pages/Login";
 import { Home } from "./components/Home";
-import useAuth from "./hooks/useAuth"
+import useAuth from "./hooks/useAuth";
 
 const Private = ({ Item }) => {
     const { signed } = useAuth();
