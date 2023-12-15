@@ -16,15 +16,15 @@ const Private = ({ Item }, useLayout) => {
 const AppRoutes = [
     {
         index: true,
-        element: <Private Item={Home} />
+        element: <Private Item={Home} useLayout={true} />
     },
     {
         path: '/counter',
-        element: <Private Item={Counter} />
+        element: <Private Item={Counter} useLayout={true} />
     },
     {
         path: '/fetch-data',
-        element: <Private Item={FetchData} />
+        element: <Private Item={FetchData} useLayout={true} />
     },
     {
         path: '/Login',
