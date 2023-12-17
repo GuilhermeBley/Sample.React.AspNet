@@ -1,11 +1,13 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth'
 import './NavMenu.css';
 
 const NavMenu = () => {
 
     const [collapsed, setCollapsed] = useState(true);
+    const { signout }  = useAuth();
 
     const toggleNavbar = () => {
         setCollapsed(!collapsed);
@@ -26,6 +28,9 @@ const NavMenu = () => {
                         </NavItem>
                         <NavItem>
                             <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} className="text-dark">Logout</NavLink>
                         </NavItem>
                     </ul>
                 </Collapse>
