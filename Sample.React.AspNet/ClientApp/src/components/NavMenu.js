@@ -30,7 +30,7 @@ const NavMenu = () => {
                             <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} className="text-dark">Logout</NavLink>
+                            <NavLink tag={Link} onClick={signout} className="text-dark" to="/login">Logout</NavLink>
                         </NavItem>
                     </ul>
                 </Collapse>
