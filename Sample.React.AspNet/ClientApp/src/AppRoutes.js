@@ -1,7 +1,7 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import Login from "./pages/Login";
-import { Home } from "./components/Home";
+import Home from "./pages/Home";
 import useAuth from "./hooks/useAuth";
 import Layout from "./components/Layout"
 
