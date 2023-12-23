@@ -1,4 +1,4 @@
-import { Counter } from "./components/Counter";
+import { Counter } from "./pages/Counter";
 import FetchData from "./pages/FetchData";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
